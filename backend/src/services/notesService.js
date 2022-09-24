@@ -18,7 +18,11 @@ const createNoteService = async (body) => {
 
 const updateNoteService = async (id, body) => {
   try {
-    await Notes.findById(id)
+    const exists = await Notes.findById(id)
+
+    if (!exists) {
+      return { status: "This ID isn't correct" }
+    }
   } catch (err) {
     return { status: "Error" }
   }
@@ -33,7 +37,7 @@ const updateNoteService = async (id, body) => {
       returnDocument: "after",
     })
   } catch (err) {
-    console.log(err)
+    return { status: "Error in the update proccess" }
   }
   return updateNote
 }

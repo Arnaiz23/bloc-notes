@@ -28,13 +28,13 @@ const getNote = async (req, res) => {
   if (!getNote || getNote.status) {
     return res.status(404).send({
       status: "ERROR",
-      message: "This ID isn't correct",
+      data: "This ID isn't correct",
     })
   }
 
   res.status(200).send({
     status: "OK",
-    message: getNote,
+    data: getNote,
   })
 }
 
@@ -82,7 +82,7 @@ const updateNote = async (req, res) => {
   ) {
     return res.status(400).send({
       status: "ERROR",
-      message: "Error in the TITLE field",
+      data: "Error in the TITLE field",
     })
   }
 
@@ -93,7 +93,7 @@ const updateNote = async (req, res) => {
   ) {
     return res.status(400).send({
       status: "ERROR",
-      message: "Error in the CONTENT field",
+      data: "Error in the CONTENT field",
     })
   }
 
@@ -102,13 +102,13 @@ const updateNote = async (req, res) => {
   if (updateNote.status) {
     return res.status(404).send({
       status: "ERROR",
-      message: "This ID isn't correct",
+      data: updateNote.status,
     })
   }
 
   res.status(200).send({
     status: "OK",
-    message: updateNote,
+    data: updateNote,
   })
 }
 
@@ -120,13 +120,13 @@ const deleteNote = async (req, res) => {
   if (deleteNote.status) {
     return res.status(404).send({
       status: "ERROR",
-      message: "This ID isn't exists",
+      data: "This ID isn't exists",
     })
   }
 
   res.status(200).send({
     status: "OK",
-    message: deleteNote,
+    data: deleteNote,
   })
 }
 
