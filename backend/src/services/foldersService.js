@@ -84,9 +84,27 @@ const deleteFolderService = async (id) => {
   }
 }
 
+const getFolderService = async (id) => {
+  try {
+    const folder = await Folder.findById(id)
+
+    const notes = await Notes.find({ folder_id: folder._id })
+
+    const data = {
+      folderName: folder.name,
+      notes,
+    }
+
+    return data
+  } catch (err) {
+    return { status: "This ID isn't exists" }
+  }
+}
+
 module.exports = {
   getFoldersService,
   createFolderService,
   updateFolderService,
   deleteFolderService,
+  getFolderService,
 }

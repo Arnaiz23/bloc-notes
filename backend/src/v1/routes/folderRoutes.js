@@ -6,9 +6,12 @@ const {
   getFolders,
   updateFolders,
   deleteFolder,
+  getFolder,
 } = require("../../controllers/foldersControllers")
 
 router.get("/folders", getFolders)
+
+router.get("/folders/:id", getFolder)
 
 router.post("/folders", createFolder)
 

@@ -3,6 +3,7 @@ const {
   createFolderService,
   updateFolderService,
   deleteFolderService,
+  getFolderService,
 } = require("../services/foldersService")
 
 const getFolders = async (req, res) => {
@@ -62,4 +63,28 @@ const deleteFolder = async (req, res) => {
   })
 }
 
-module.exports = { getFolders, createFolder, updateFolders, deleteFolder }
+const getFolder = async (req, res) => {
+  const { id } = req.params
+
+  const folder = await getFolderService(id)
+
+  if (folder.status) {
+    return res.status(404).send({
+      status: "ERROR",
+      data: folder.status,
+    })
+  }
+
+  res.status(200).send({
+    status: "OK",
+    data: folder,
+  })
+}
+
+module.exports = {
+  getFolders,
+  createFolder,
+  updateFolders,
+  deleteFolder,
+  getFolder,
+}
