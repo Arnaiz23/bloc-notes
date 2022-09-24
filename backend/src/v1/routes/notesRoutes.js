@@ -5,6 +5,7 @@ const {
   getNotes,
   createNote,
   updateNote,
+  getNote,
 } = require("../../controllers/notesControllers")
 
 router.get("/", (req, res) => {
@@ -12,6 +13,8 @@ router.get("/", (req, res) => {
 })
 
 router.get("/notes", getNotes)
+
+router.get("/notes/:id", getNote)
 
 router.post("/notes", createNote)
 

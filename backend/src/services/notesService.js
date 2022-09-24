@@ -38,4 +38,21 @@ const updateNoteService = async (id, body) => {
   return updateNote
 }
 
-module.exports = { getNotesService, createNoteService, updateNoteService }
+const getNoteService = async (id) => {
+  let note
+
+  try {
+    note = await Notes.findById(id)
+  } catch (err) {
+    note = { status: "Error" }
+  }
+
+  return note
+}
+
+module.exports = {
+  getNotesService,
+  createNoteService,
+  updateNoteService,
+  getNoteService,
+}

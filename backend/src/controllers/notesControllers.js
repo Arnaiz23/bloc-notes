@@ -2,6 +2,7 @@ const {
   getNotesService,
   createNoteService,
   updateNoteService,
+  getNoteService,
 } = require("../services/notesService")
 
 async function getNotes(req, res) {
@@ -15,6 +16,24 @@ async function getNotes(req, res) {
   res.status(200).send({
     status: "OK",
     data: notes,
+  })
+}
+
+const getNote = async (req, res) => {
+  const { id } = req.params
+
+  const getNote = await getNoteService(id)
+
+  if (getNote.status) {
+    return res.status(404).send({
+      status: "ERROR",
+      message: "This ID isn't correct",
+    })
+  }
+
+  res.status(200).send({
+    status: "OK",
+    message: getNote,
   })
 }
 
@@ -92,4 +111,4 @@ const updateNote = async (req, res) => {
   })
 }
 
-module.exports = { getNotes, createNote, updateNote }
+module.exports = { getNotes, createNote, updateNote, getNote }
