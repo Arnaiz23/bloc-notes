@@ -3,6 +3,8 @@
 ## Issues
 
 - Create a new field in the Note schema (status: {"active" - "trash"}) for delete a Note but send in a trash. In trash you can delete permanently.
+- When you create a new Note, update the folder length if you add this note in a folder (View if Samsung Notes do this)
+- Check the updateFolderService
 
 ## Backend
 
