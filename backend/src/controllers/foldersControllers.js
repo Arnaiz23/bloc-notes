@@ -34,7 +34,7 @@ const updateFolders = async (req, res) => {
   if (updateFolder.status) {
     return res.status(400).send({
       status: "ERROR",
-      data: "This ID isn't exists",
+      data: updateFolder.status,
     })
   }
 

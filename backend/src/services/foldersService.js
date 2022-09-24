@@ -30,14 +30,11 @@ const createFolderService = async (body) => {
 }
 
 const updateFolderService = async (id, body) => {
-  /*
-   * Check the errors. If any await results in error, all send "This id isn't exists"
-   */
   try {
     const search = await Folder.findById(id)
 
     if (!search) {
-      return { status: "error" }
+      return { status: "This ID isn't exists" }
     }
 
     const notes = await Notes.find({ folder_id: id })
@@ -51,9 +48,13 @@ const updateFolderService = async (id, body) => {
       returnDocument: "after",
     })
 
+    if (!updateNote) {
+      return { status: "Error in the update proccess" }
+    }
+
     return updateNote
   } catch (err) {
-    return { status: "error" }
+    return { status: "This ID isn't exists" }
   }
 }
 
