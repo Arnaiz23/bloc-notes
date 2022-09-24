@@ -1,4 +1,16 @@
-const { createFolderService } = require("../services/foldersService")
+const {
+  getFoldersService,
+  createFolderService,
+} = require("../services/foldersService")
+
+const getFolders = async (req, res) => {
+  const getFolders = await getFoldersService()
+
+  res.status(200).send({
+    status: "OK",
+    message: getFolders,
+  })
+}
 
 const createFolder = async (req, res) => {
   const { body } = req
@@ -11,4 +23,4 @@ const createFolder = async (req, res) => {
   })
 }
 
-module.exports = { createFolder }
+module.exports = { getFolders, createFolder }

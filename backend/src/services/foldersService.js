@@ -1,5 +1,17 @@
 const Folder = require("../database/schemas/Folder")
 
+const getFoldersService = async () => {
+  let getFolders
+
+  try {
+    getFolders = await Folder.find()
+  } catch (err) {
+    console.log(err)
+  }
+
+  return getFolders
+}
+
 const createFolderService = async (body) => {
   let createFolder
   const date = new Date()
@@ -15,4 +27,4 @@ const createFolderService = async (body) => {
   return createFolder
 }
 
-module.exports = { createFolderService }
+module.exports = { getFoldersService, createFolderService }
