@@ -44,10 +44,21 @@ const getNoteService = async (id) => {
   try {
     note = await Notes.findById(id)
   } catch (err) {
-    note = { status: "Error" }
+    return { status: "Error" }
   }
 
   return note
+}
+
+const deleteNoteService = async (id) => {
+  let response
+
+  try {
+    response = await Notes.findByIdAndDelete(id)
+  } catch (err) {
+    response = { status: "Error" }
+  }
+  return response
 }
 
 module.exports = {
@@ -55,4 +66,5 @@ module.exports = {
   createNoteService,
   updateNoteService,
   getNoteService,
+  deleteNoteService,
 }

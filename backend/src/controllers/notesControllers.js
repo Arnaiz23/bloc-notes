@@ -3,6 +3,7 @@ const {
   createNoteService,
   updateNoteService,
   getNoteService,
+  deleteNoteService,
 } = require("../services/notesService")
 
 async function getNotes(req, res) {
@@ -24,7 +25,7 @@ const getNote = async (req, res) => {
 
   const getNote = await getNoteService(id)
 
-  if (getNote.status) {
+  if (!getNote || getNote.status) {
     return res.status(404).send({
       status: "ERROR",
       message: "This ID isn't correct",
@@ -111,4 +112,22 @@ const updateNote = async (req, res) => {
   })
 }
 
-module.exports = { getNotes, createNote, updateNote, getNote }
+const deleteNote = async (req, res) => {
+  const { id } = req.params
+
+  const deleteNote = await deleteNoteService(id)
+
+  if (deleteNote.status) {
+    return res.status(404).send({
+      status: "ERROR",
+      message: "This ID isn't exists",
+    })
+  }
+
+  res.status(200).send({
+    status: "OK",
+    message: deleteNote,
+  })
+}
+
+module.exports = { getNotes, createNote, updateNote, getNote, deleteNote }
