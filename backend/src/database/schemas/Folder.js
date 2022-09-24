@@ -14,7 +14,6 @@ const FolderSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
   },
   length: {
     type: Number,
