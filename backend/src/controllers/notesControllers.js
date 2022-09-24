@@ -1,6 +1,7 @@
 const {
   getNotesService,
   createNoteService,
+  updateNoteService,
 } = require("../services/notesService")
 
 async function getNotes(req, res) {
@@ -25,7 +26,7 @@ const createNote = async (req, res) => {
     body.title.length === 0 ||
     typeof body.title !== "string"
   ) {
-    return res.status(404).send({
+    return res.status(400).send({
       status: "ERROR",
       data: "Error in the TITLE field",
     })
@@ -36,7 +37,7 @@ const createNote = async (req, res) => {
     body.content.length === 0 ||
     typeof body.content !== "string"
   ) {
-    return res.status(404).send({
+    return res.status(400).send({
       status: "ERROR",
       data: "Error in the CONTENT field",
     })
@@ -50,4 +51,45 @@ const createNote = async (req, res) => {
   })
 }
 
-module.exports = { getNotes, createNote }
+const updateNote = async (req, res) => {
+  const { body } = req
+  const { id } = req.params
+
+  if (
+    typeof body.title === "undefined" ||
+    typeof body.title !== "string" ||
+    body.title.length === 0
+  ) {
+    return res.status(400).send({
+      status: "ERROR",
+      message: "Error in the TITLE field",
+    })
+  }
+
+  if (
+    typeof body.content === "undefined" ||
+    typeof body.content !== "string" ||
+    body.content.length === 0
+  ) {
+    return res.status(400).send({
+      status: "ERROR",
+      message: "Error in the CONTENT field",
+    })
+  }
+
+  const updateNote = await updateNoteService(id, body)
+
+  if (updateNote.status) {
+    return res.status(404).send({
+      status: "ERROR",
+      message: "This ID isn't correct",
+    })
+  }
+
+  res.status(200).send({
+    status: "OK",
+    message: updateNote,
+  })
+}
+
+module.exports = { getNotes, createNote, updateNote }

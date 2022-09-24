@@ -19,11 +19,9 @@ const NotesSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now,
   },
   folder_id: {
     type: Schema.Types.ObjectId,
