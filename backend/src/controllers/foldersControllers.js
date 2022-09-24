@@ -2,6 +2,7 @@ const {
   getFoldersService,
   createFolderService,
   updateFolderService,
+  deleteFolderService,
 } = require("../services/foldersService")
 
 const getFolders = async (req, res) => {
@@ -9,7 +10,7 @@ const getFolders = async (req, res) => {
 
   res.status(200).send({
     status: "OK",
-    message: getFolders,
+    data: getFolders,
   })
 }
 
@@ -20,7 +21,7 @@ const createFolder = async (req, res) => {
 
   res.status(201).send({
     status: "OK",
-    message: newFolder,
+    data: newFolder,
   })
 }
 
@@ -33,14 +34,32 @@ const updateFolders = async (req, res) => {
   if (updateFolder.status) {
     return res.status(400).send({
       status: "ERROR",
-      message: "This ID isn't exists",
+      data: "This ID isn't exists",
     })
   }
 
   res.status(200).send({
     status: "OK",
-    message: updateFolder,
+    data: updateFolder,
   })
 }
 
-module.exports = { getFolders, createFolder, updateFolders }
+const deleteFolder = async (req, res) => {
+  const { id } = req.params
+
+  const deleteFolder = await deleteFolderService(id)
+
+  if (deleteFolder.status) {
+    return res.status(400).send({
+      status: "ERROR",
+      data: "This ID isn't exists",
+    })
+  }
+
+  res.status(200).send({
+    status: "OK",
+    data: deleteFolder,
+  })
+}
+
+module.exports = { getFolders, createFolder, updateFolders, deleteFolder }

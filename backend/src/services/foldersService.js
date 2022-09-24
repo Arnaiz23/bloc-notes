@@ -57,4 +57,35 @@ const updateFolderService = async (id, body) => {
   }
 }
 
-module.exports = { getFoldersService, createFolderService, updateFolderService }
+const deleteFolderService = async (id) => {
+  try {
+    const deleteFolder = await Folder.findByIdAndDelete(id)
+
+    if (!deleteFolder) {
+      return { status: "error" }
+    }
+
+    const notesFolder = await Notes.find({ folder_id: deleteFolder._id })
+
+    if (notesFolder.length > 0) {
+      for (const note of notesFolder) {
+        note.folder_id = ""
+        await Notes.findByIdAndUpdate(note._id, note, {
+          returnDocument: "after",
+        })
+      }
+    }
+
+    return deleteFolder
+  } catch (err) {
+    console.log(err)
+    return { status: "error" }
+  }
+}
+
+module.exports = {
+  getFoldersService,
+  createFolderService,
+  updateFolderService,
+  deleteFolderService,
+}
