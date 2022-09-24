@@ -24,8 +24,7 @@ const NotesSchema = new Schema({
     type: Date,
   },
   folder_id: {
-    type: Schema.Types.ObjectId,
-    ref: "Folder",
+    type: String,
     required: false,
   },
 })
