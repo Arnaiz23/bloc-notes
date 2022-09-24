@@ -1,5 +1,9 @@
 # Notepad project
 
+## Issues
+
+- Create a new field in the Note schema (status: {"active" - "trash"}) for delete a Note but send in a trash. In trash you can delete permanently.
+
 ## Backend
 
 ### Routes
