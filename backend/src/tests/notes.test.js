@@ -87,7 +87,39 @@ describe("/notes create Note", () => {
 })
 
 /* Delete */
-/* expect(contents).not.toContain("ahsa") */
+describe("/notes deleteNote", () => {
+  it("if the first note can be deleted", async () => {
+    const { data } = await getAllContentsFromNotes()
+    await api.delete(url + "/" + data[0]._id).expect(200)
+
+    const { contents } = await getAllContentsFromNotes()
+    expect(contents).not.toContain(data[0].content)
+  })
+
+  it("if the note can be deleted with a fake ID", async () => {
+    await api.delete(url + "/1212").expect(404)
+    const { data } = await getAllContentsFromNotes()
+    expect(data).toHaveLength(initialNotes.length)
+  })
+})
+
+/* Update */
+describe("/notes updateNotes", () => {
+  it("if the second note can be updated", async () => {
+    const { data } = await getAllContentsFromNotes()
+    const bodyUpdate = {
+      title: "Note Update",
+      content: "Second note updated",
+    }
+
+    await api
+      .patch(url + "/" + data[1]._id)
+      .send(bodyUpdate)
+      .expect(200)
+    const { data: secondData } = await getAllContentsFromNotes()
+    expect(secondData[1].content).toBe(bodyUpdate.content)
+  })
+})
 
 afterAll(() => {
   mongoose.connection.close()

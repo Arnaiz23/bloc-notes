@@ -28,9 +28,9 @@
 - Notes
     - getAllNotes OK
     - getNote OK
-    - createNote
-    - updateNote
-    - deleteNote
+    - createNote OK
+    - updateNote OK
+    - deleteNote OK
 
 
 ## Database
