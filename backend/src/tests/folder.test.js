@@ -49,6 +49,24 @@ describe("/folders get one folder", () => {
   })
 })
 
+// Delete Folder
+describe("/notes deleteFolders", () => {
+  it("if i can delete the first folder", async () => {
+    const response = await api.get(folderUrl)
+    const { data } = response.body
+
+    await api.delete(folderUrl + "/" + data[0]._id).expect(200)
+    expect(data).toHaveLength(initialFolders.length)
+  })
+
+  it("if not deleted any folder if the ID is fake", async () => {
+    await api.delete(folderUrl + "/124").expect(400)
+    const response = await api.get(folderUrl)
+    const { data } = response.body
+    expect(data).toHaveLength(initialFolders.length)
+  })
+})
+
 afterAll(async () => {
   mongoose.connection.close()
   server.close()
