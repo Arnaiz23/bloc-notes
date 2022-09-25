@@ -49,6 +49,33 @@ describe("/folders get one folder", () => {
   })
 })
 
+// Create folder
+describe("/notes createFolders", () => {
+  it("if i can create a new folder", async () => {
+    const newFolder = {
+      name: "New folder test",
+      length: 0,
+    }
+
+    await api.post(folderUrl).send(newFolder).expect(201)
+    const response = await api.get(folderUrl)
+    const { data } = response.body
+    expect(data).toHaveLength(initialFolders.length + 1)
+  })
+
+  it("if i can't create a folder if the nameFolder is empty", async () => {
+    const newFolder = {
+      name: "",
+      length: 0,
+    }
+
+    await api.post(folderUrl).send(newFolder).expect(400)
+    const response = await api.get(folderUrl)
+    const { data } = response.body
+    expect(data).toHaveLength(initialFolders.length)
+  })
+})
+
 // Delete Folder
 describe("/notes deleteFolders", () => {
   it("if i can delete the first folder", async () => {
