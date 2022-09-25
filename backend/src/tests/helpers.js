@@ -32,6 +32,19 @@ const initialNotes = [
   },
 ]
 
+const initialFolders = [
+  {
+    name: "Prueba Test Folder",
+    length: 0,
+  },
+  {
+    name: "Prueba Test Folder 2",
+    length: 0,
+  },
+]
+
+const folderUrl = "/api/v1/folders"
+
 const getAllContentsFromNotes = async () => {
   const response = await api.get(url)
   const { data } = response.body
@@ -48,4 +61,6 @@ module.exports = {
   newNoteError,
   initialNotes,
   getAllContentsFromNotes,
+  initialFolders,
+  folderUrl,
 }
