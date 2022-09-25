@@ -84,7 +84,6 @@ const deleteFolderService = async (id) => {
 
     return deleteFolder
   } catch (err) {
-    console.log(err)
     return { status: "error" }
   }
 }
