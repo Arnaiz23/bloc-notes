@@ -16,11 +16,10 @@ beforeEach(async () => {
   /* Delete all the notes */
   await Note.deleteMany({})
 
-  const note1 = new Note(initialNotes[0])
-  await note1.save()
-
-  const note2 = new Note(initialNotes[1])
-  await note2.save()
+  for (const note of initialNotes) {
+    const noteSave = new Note(note)
+    await noteSave.save()
+  }
 })
 
 describe("/notes getAllNotes", () => {
@@ -86,6 +85,9 @@ describe("/notes create Note", () => {
     expect(contents).toContain(newNote.content)
   })
 })
+
+/* Delete */
+/* expect(contents).not.toContain("ahsa") */
 
 afterAll(() => {
   mongoose.connection.close()
