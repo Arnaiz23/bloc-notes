@@ -23,16 +23,6 @@
     - Get notes
 
 
-### Tests
-
-- Notes
-    - getAllNotes OK
-    - getNote OK
-    - createNote OK
-    - updateNote OK
-    - deleteNote OK
-
-
 ## Database
 
 ### Collections
