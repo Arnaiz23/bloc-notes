@@ -30,6 +30,25 @@ describe("/folders getFolders", () => {
   })
 })
 
+// Get Folders
+describe("/folders get one folder", () => {
+  it("if i can return the first folder", async () => {
+    const response = await api.get(folderUrl)
+    const { data: firstData } = response.body
+
+    const secondResponse = await api
+      .get(folderUrl + "/" + firstData[0]._id)
+      .expect(200)
+    const { data: secondData } = secondResponse.body
+    const { name } = secondData
+    expect(name).toBe(initialFolders[0].folderName)
+  })
+
+  it("if i can't return a folder if the ID is fake", async () => {
+    await api.get(folderUrl + "/1213").expect(404)
+  })
+})
+
 afterAll(async () => {
   mongoose.connection.close()
   server.close()
