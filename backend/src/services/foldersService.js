@@ -15,6 +15,11 @@ const getFoldersService = async () => {
 
 const createFolderService = async (body) => {
   let createFolder
+
+  if (body.name.length <= 0) {
+    return { status: "The name cannot be empty" }
+  }
+
   const date = new Date()
 
   body.createdAt = date

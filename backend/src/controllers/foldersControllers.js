@@ -20,6 +20,13 @@ const createFolder = async (req, res) => {
 
   const newFolder = await createFolderService(body)
 
+  if (newFolder.status) {
+    return res.status(400).send({
+      status: "ERROR",
+      data: newFolder.status,
+    })
+  }
+
   res.status(201).send({
     status: "OK",
     data: newFolder,
