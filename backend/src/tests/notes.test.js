@@ -16,9 +16,7 @@ const newNoteError = {
   content: "Esta es una nueva nota y esta creada por el test",
 }
 
-describe("/notes ", () => {
-  /* All Notes */
-
+describe("/notes getAllNotes", () => {
   it("getAllNotes (500)", async () => {
     await api.get(url).expect(500)
   })
@@ -29,7 +27,9 @@ describe("/notes ", () => {
       .expect(200)
       .expect("Content-type", /application\/json/)
   })
+})
 
+describe("/notes getOneNote", () => {
   /* ONE NOTE (Markdown 2 -> 632f84e671fdbdcc998baa7a) */
 
   it("getOneNote (500)", async () => {
@@ -50,9 +50,9 @@ describe("/notes ", () => {
       .expect(200)
       .expect("Content-type", /application\/json/)
   })
+})
 
-  /* Create note */
-
+describe("/notes create Note", () => {
   it("Create note (500)", async () => {
     await api
       .post(url)

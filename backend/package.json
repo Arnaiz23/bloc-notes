@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
-    "test": "jest --verbose --silent"
+    "test": "jest --verbose --silent",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "Notepad",
