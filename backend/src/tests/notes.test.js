@@ -1,38 +1,16 @@
-const supertest = require("supertest")
 const mongoose = require("mongoose")
 
-const { app, server } = require("../index")
+const { server } = require("../index")
 const Note = require("../database/schemas/Notes")
 
-const api = supertest(app)
-
-const url = "/api/v1/notes"
-const newNote = {
-  title: "Create Note Test",
-  content: "Esta es una nueva nota y esta creada por el test",
-}
-const newNoteError = {
-  title: "",
-  content: "Esta es una nueva nota y esta creada por el test",
-}
-
-/* Create an array for not depend of the state of the database at the moment that execute the tests */
-const initialNotes = [
-  {
-    title: "NoteTest",
-    content: "Esta es una nueva nota y esta muy bien",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    folder_id: "",
-  },
-  {
-    title: "NoteTest2",
-    content: "Esta es una nueva nota y esta muy bien",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    folder_id: "",
-  },
-]
+const {
+  api,
+  url,
+  initialNotes,
+  newNote,
+  newNoteError,
+  getAllContentsFromNotes,
+} = require("./helpers")
 
 beforeEach(async () => {
   /* Delete all the notes */
@@ -55,7 +33,7 @@ describe("/notes getAllNotes", () => {
 
   it("getAllNotes have as minimum 2 notes", async () => {
     const response = await api.get(url)
-    expect(response.body.data).toHaveLength(2)
+    expect(response.body.data).toHaveLength(initialNotes.length)
   })
 })
 
@@ -75,6 +53,11 @@ describe("/notes getOneNote", () => {
       .expect(200)
       .expect("Content-type", /application\/json/)
   })
+
+  it("getOneNote. Check if one note has the content (Esta es la nueva nota y es la primera)", async () => {
+    const { contents } = await getAllContentsFromNotes()
+    expect(contents).toContain("Esta es la nueva nota y es la primera")
+  })
 })
 
 describe("/notes create Note", () => {
@@ -84,6 +67,11 @@ describe("/notes create Note", () => {
       .send(newNoteError)
       .expect(400)
       .expect("Content-type", /application\/json/)
+
+    const response = await api.get(url)
+    const { data } = response.body
+
+    expect(data).toHaveLength(initialNotes.length)
   })
 
   it("Create note (201)", async () => {
@@ -92,6 +80,10 @@ describe("/notes create Note", () => {
       .send(newNote)
       .expect(201)
       .expect("Content-type", /application\/json/)
+
+    const { contents, data } = await getAllContentsFromNotes()
+    expect(data).toHaveLength(initialNotes.length + 1)
+    expect(contents).toContain(newNote.content)
   })
 })
 
