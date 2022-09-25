@@ -7,7 +7,10 @@ const folderRoutes = require("./v1/routes/folderRoutes")
 require("./database/db")
 
 const app = express()
-const PORT = process.env.PORT || 9000
+let PORT = process.env.PORT || 9000
+if (process.env.NODE_ENV === "test") {
+  PORT = "9001"
+}
 
 app.use(cors())
 app.use(express.json())
