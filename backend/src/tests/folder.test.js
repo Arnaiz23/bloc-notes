@@ -50,7 +50,7 @@ describe("/folders get one folder", () => {
 })
 
 // Create folder
-describe("/notes createFolders", () => {
+describe("/folders createFolders", () => {
   it("if i can create a new folder", async () => {
     const newFolder = {
       name: "New folder test",
@@ -63,7 +63,7 @@ describe("/notes createFolders", () => {
     expect(data).toHaveLength(initialFolders.length + 1)
   })
 
-  it("if i can't create a folder if the nameFolder is empty", async () => {
+  it.skip("if i can't create a folder if the nameFolder is empty", async () => {
     const newFolder = {
       name: "",
       length: 0,
@@ -77,7 +77,7 @@ describe("/notes createFolders", () => {
 })
 
 // Delete Folder
-describe("/notes deleteFolders", () => {
+describe("/folders deleteFolders", () => {
   it("if i can delete the first folder", async () => {
     const response = await api.get(folderUrl)
     const { data } = response.body
@@ -86,11 +86,31 @@ describe("/notes deleteFolders", () => {
     expect(data).toHaveLength(initialFolders.length)
   })
 
-  it("if not deleted any folder if the ID is fake", async () => {
+  it.skip("if not deleted any folder if the ID is fake", async () => {
     await api.delete(folderUrl + "/124").expect(400)
     const response = await api.get(folderUrl)
     const { data } = response.body
     expect(data).toHaveLength(initialFolders.length)
+  })
+})
+
+// Update Folder
+describe("/notes Update Folder", () => {
+  it("if I can update the second folder", async () => {
+    const response = await api.get(folderUrl)
+    const { data } = response.body
+    const lastFolder = data.find(
+      (folder) => folder.name === "Prueba Test Folder 2"
+    )
+
+    const newBody = {
+      name: "New folder test Updated",
+      length: 0,
+    }
+    await api
+      .patch(folderUrl + "/" + lastFolder._id)
+      .send(newBody)
+      .expect(200)
   })
 })
 
