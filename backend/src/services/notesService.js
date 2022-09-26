@@ -1,4 +1,6 @@
+const { exists } = require("../database/schemas/Folder")
 const Notes = require("../database/schemas/Notes")
+const Folder = require("../database/schemas/Folder")
 
 const getNotesService = async () => {
   const notes = await Notes.find()
@@ -27,6 +29,15 @@ const updateNoteService = async (id, body) => {
     return { status: "Error" }
   }
 
+  let folder
+  if (body.folder_id.length > 0) {
+    try {
+      folder = await Folder.findById(body.folder_id)
+    } catch (err) {
+      return { status: "The ID folder doesn't exists" }
+    }
+  }
+
   const date = new Date()
 
   body.updatedAt = date
@@ -39,6 +50,11 @@ const updateNoteService = async (id, body) => {
   } catch (err) {
     return { status: "Error in the update proccess" }
   }
+
+  await Folder.findByIdAndUpdate(updateNote.folder_id, {
+    length: folder.length + 1,
+  })
+
   return updateNote
 }
 
@@ -62,6 +78,16 @@ const deleteNoteService = async (id) => {
   } catch (err) {
     response = { status: "Error" }
   }
+
+  try {
+    const folder = await Folder.findById(response.folder_id)
+    await Folder.findByIdAndUpdate(response.folder_id, {
+      length: folder.length - 1,
+    })
+  } catch (err) {
+    console.log(err)
+  }
+
   return response
 }
 
