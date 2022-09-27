@@ -16,12 +16,9 @@ export default function AllNotesPage () {
 
   return (
     <NotesColumn>
-      <h2 className="w-full grid place-items-center p-5 pb-2 text-xl font-bold">All Notes</h2>
-      <hr />
+      <h2 className="w-full grid place-items-center p-5 text-xl font-bold h-[56px] sticky top-0 bg-orange-100 dark:bg-zinc-800 border-b border-white">All Notes</h2>
       {notes.length > 0 && 
-          notes.map(note => 
-          <NotesPreview note={note} key={note._id} />
-          )
+          notes.map(note => <NotesPreview note={note} key={note._id} /> )
       }
     </NotesColumn>
   )
