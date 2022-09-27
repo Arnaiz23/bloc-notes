@@ -14,14 +14,14 @@ export default function Header() {
       </div>
       <div>
         <div className="py-5">
-          <TextMenu title="All Notes" icon={<FaFileAlt />} />
+          <TextMenu title="All Notes" icon={<FaFileAlt />} link="/all" />
           <ListMenu title="Folders" icon={<FaBook />} />
         </div>
       </div>
       <div className="absolute bottom-5 left-5">
-        <TextMenu title="New Folder" icon={<FaFolderPlus />} />
-        <TextMenu title="New Note" icon={<FaFile />} />
-        <TextMenu title="Trash" icon={<FaTrash />} />
+        <TextMenu title="New Folder" icon={<FaFolderPlus />} link="/" />
+        <TextMenu title="New Note" icon={<FaFile />} link="/" />
+        <TextMenu title="Trash" icon={<FaTrash />} link="/" />
       </div>
     </header>
   )
