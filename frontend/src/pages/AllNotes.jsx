@@ -1,7 +1,10 @@
 import React from "react";
+import NotesColumn from "../components/NotesColumn";
 
 export default function AllNotesPage () {
   return (
-    <div className="border border-white w-full"></div>
+    <NotesColumn>
+      <h1>Hola</h1>
+    </NotesColumn>
   )
 }

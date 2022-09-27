@@ -20,7 +20,7 @@ export default function Header() {
       </div>
       <div className="absolute bottom-5 left-5">
         <TextMenu title="New Folder" icon={<FaFolderPlus />} link="/" />
-        <TextMenu title="New Note" icon={<FaFile />} link="/" />
+        <TextMenu title="New Note" icon={<FaFile />} link="/all/new" />
         <TextMenu title="Trash" icon={<FaTrash />} link="/" />
       </div>
     </header>
