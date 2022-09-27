@@ -2,7 +2,7 @@ import React from "react";
 
 export default function NotesColumn({children}) {
   return (
-    <div className="min-w-[300px] bg-zinc-800">
+    <div className="w-[300px] bg-orange-100 dark:bg-zinc-800">
       {children}
     </div>
   )

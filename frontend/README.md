@@ -19,3 +19,4 @@
 ## Changes
 
 - Hover menu options in light theme
+- All the light theme

@@ -6,7 +6,7 @@ import AllNotesPage from "./pages/AllNotes.jsx"
 function App() {
 
   return (
-    <div className="bg-orange-50 dark:bg-zinc-900 text-black dark:text-white flex flex-row w-full min-h-screen overflow-hidden">
+    <div className="bg-orange-50 dark:bg-zinc-900 text-black dark:text-white flex flex-row w-full min-h-screen overflow-hidden transition-colors duration-500">
       <Header />
       <Switch>
         <Route path="/" component={DefaultPage} />
