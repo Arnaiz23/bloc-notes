@@ -9,7 +9,9 @@ export default function Header() {
 
   return (
     <header className="h-screen bg-dark xl:flex flex-col min-w-[255px] hidden p-5 relative">
-      <ToggleTheme />
+      <div className="w-full flex justify-end items-center px-6"> 
+        <ToggleTheme />
+      </div>
       <div>
         <div className="py-5">
           <TextMenu title="All Notes" icon={<FaFileAlt />} />
