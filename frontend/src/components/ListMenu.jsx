@@ -29,7 +29,7 @@ export default function ListMenu({icon, title}) {
         {folders.length > 0 &&
             folders.map(folder => 
             <li key={folder._id} className="flex items-center justify-between">
-              <TextMenu title={folder.name} icon={<FaFolder />} link="/" />
+              <TextMenu title={folder.name} icon={<FaFolder />} link={`/${folder._id}`} />
               <span className="opacity-[0.6]">{folder.length}</span>
             </li>
             )
