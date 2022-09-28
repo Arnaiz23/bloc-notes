@@ -11,3 +11,8 @@ export const createNote = async (body) => {
   })
   return await response.json()
 }
+
+export const getOneNote = async (id) => {
+  const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}notes/${id}`)
+  return await response.json()
+}

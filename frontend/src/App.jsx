@@ -3,6 +3,7 @@ import {Route, Switch} from "wouter"
 import Header from "./components/Header.jsx"
 import AllNotesPage from "./pages/AllNotes.jsx"
 import NewNotePage from "./pages/NewNote.jsx"
+import OneNotePage from "./pages/OneNote.jsx"
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" component={DefaultPage} />
         <Route path="/all" component={AllNotesPage} />
         <Route path="/all/new" component={NewNotePage} />
+        <Route path="/all/:id" component={OneNotePage} />
         <Route component={Page404} />
       </Switch>
     </div>
