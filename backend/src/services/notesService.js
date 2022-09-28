@@ -30,7 +30,7 @@ const updateNoteService = async (id, body) => {
   }
 
   let folder
-  if (body.folder_id.length > 0) {
+  if (body.folder_id && body.folder_id.length > 0) {
     try {
       folder = await Folder.findById(body.folder_id)
     } catch (err) {
@@ -51,9 +51,11 @@ const updateNoteService = async (id, body) => {
     return { status: "Error in the update proccess" }
   }
 
-  await Folder.findByIdAndUpdate(updateNote.folder_id, {
-    length: folder.length + 1,
-  })
+  if (updateNote.folder_id) {
+    await Folder.findByIdAndUpdate(updateNote.folder_id, {
+      length: folder.length + 1,
+    })
+  }
 
   return updateNote
 }
