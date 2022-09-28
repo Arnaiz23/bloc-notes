@@ -16,3 +16,12 @@ export const getOneNote = async (id) => {
   const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}notes/${id}`)
   return await response.json()
 }
+
+export const updateOne = async (id, body) => {
+  const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}notes/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(body),
+    headers: new Headers({"Content-type": "application/json"})
+  })
+  return await response.json()
+}

@@ -11,6 +11,12 @@ export default function OneNotePage({params}) {
     "content": ""
   })
 
+  const [note, setNote] = useState({
+    "title": "",
+    "content": ""
+  })
+  const [visible, setVisible] = useState(false)
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getAllNotes()
@@ -27,6 +33,22 @@ export default function OneNotePage({params}) {
     fetchData()
   }, [params.id])
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!visible) return false
+
+    if (note.title.length <= 0) {
+      return alert("The title cannot be empty")
+    }
+
+    if (note.content.length <= 0) {
+      return alert("The content cannot be empty")
+    }
+
+    console.log(note)
+    // const response = await updateOne(id, note)
+  }
+
   return (
     <>
       <NotesColumn title="All Notes">
@@ -38,7 +60,7 @@ export default function OneNotePage({params}) {
           </div>
         }
       </NotesColumn>
-      <FormNote title={oneNote.title} content={oneNote.content} />
+      <FormNote handleSubmit={handleSubmit} setVisible={setVisible} visible={visible} title={oneNote.title} content={oneNote.content} id={params.id} setNote={setNote} note={note} />
     </>
   )
 }

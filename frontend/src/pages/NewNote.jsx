@@ -1,12 +1,20 @@
 import React, {useEffect, useState} from "react";
+import {useLocation} from "wouter";
 import FormNote from "../components/FormNote";
 
 import NotesColumn from "../components/NotesColumn";
 import NotesPreview from "../components/NotesPreview";
-import {getAllNotes} from "../services/Notes";
+import {getAllNotes, createNote} from "../services/Notes";
 
 export default function NewNotePage() {
   const [notes, setNotes] = useState([])
+
+  const [visible, setVisible] = useState(false)
+  const [note, setNote] = useState({
+    "title": "",
+    "content": ""
+  })
+  const setLocation = useLocation()[1]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +23,22 @@ export default function NewNotePage() {
     }
     fetchData()
   }, [])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!visible) return false
+
+    if (note.title.length <= 0) {
+      return alert("The title cannot be empty")
+    }
+
+    if (note.content.length <= 0) {
+      return alert("The content cannot be empty")
+    }
+    const newNoteCreated = await createNote(note)
+    alert("Note created successfully")
+    setLocation(`/all/${newNoteCreated.data._id}`)
+  }
 
   return (
     <>
@@ -27,7 +51,7 @@ export default function NewNotePage() {
           </div>
         }
       </NotesColumn>
-      <FormNote />
+      <FormNote handleSubmit={handleSubmit} visible={visible} setVisible={setVisible} setNote={setNote} note={note} />
     </>
   )
 }
