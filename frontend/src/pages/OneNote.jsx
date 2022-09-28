@@ -13,14 +13,16 @@ export default function OneNotePage({params}) {
   })
 
   const [visible, setVisible] = useState(false)
+  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getAllNotes()
       setNotes(response.data)
+      setUpdate(false)
     }
     fetchData()
-  }, [])
+  }, [update])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +45,10 @@ export default function OneNotePage({params}) {
     }
 
     const response = await updateOne(params.id, oneNote)
-    console.log(response)
+    if (response.status === "OK") {
+      setUpdate(true)
+      alert("Updated note")
+    }
   }
 
   return (
