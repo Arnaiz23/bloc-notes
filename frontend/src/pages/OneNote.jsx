@@ -1,7 +1,8 @@
+import React, {useEffect, useState} from "react";
+
 import FormNote from "../components/FormNote";
 import NotesColumn from "../components/NotesColumn";
-import React, {useEffect, useState} from "react";
-import {getAllNotes, getOneNote} from "../services/Notes";
+import {getAllNotes, getOneNote, updateOne} from "../services/Notes";
 import NotesPreview from "../components/NotesPreview";
 
 export default function OneNotePage({params}) {
@@ -11,10 +12,6 @@ export default function OneNotePage({params}) {
     "content": ""
   })
 
-  const [note, setNote] = useState({
-    "title": "",
-    "content": ""
-  })
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -37,16 +34,16 @@ export default function OneNotePage({params}) {
     e.preventDefault()
     if (!visible) return false
 
-    if (note.title.length <= 0) {
+    if (oneNote.title.length <= 0) {
       return alert("The title cannot be empty")
     }
 
-    if (note.content.length <= 0) {
+    if (oneNote.content.length <= 0) {
       return alert("The content cannot be empty")
     }
 
-    console.log(note)
-    // const response = await updateOne(id, note)
+    const response = await updateOne(params.id, oneNote)
+    console.log(response)
   }
 
   return (
@@ -60,7 +57,7 @@ export default function OneNotePage({params}) {
           </div>
         }
       </NotesColumn>
-      <FormNote handleSubmit={handleSubmit} setVisible={setVisible} visible={visible} title={oneNote.title} content={oneNote.content} id={params.id} setNote={setNote} note={note} />
+      <FormNote handleSubmit={handleSubmit} setVisible={setVisible} visible={visible} title={oneNote.title} content={oneNote.content} id={params.id} setNote={setOneNote} note={oneNote} />
     </>
   )
 }
