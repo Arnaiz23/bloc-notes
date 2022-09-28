@@ -40,3 +40,10 @@
     - updatedAt
     - content
     - folder_id
+
+
+## Frontend
+
+### Missing
+
+- in the updateNote - OneNotePage , missing the alert if the response is an error
