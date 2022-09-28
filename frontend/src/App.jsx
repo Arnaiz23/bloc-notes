@@ -20,7 +20,7 @@ function App() {
 const DefaultPage = () => {
   return (
     <div className="w-full grid place-items-center">
-      <h1 className="text-5xl">Default page</h1>
+      <h1 className="text-5xl">Bloc Notes</h1>
     </div>
 
   )

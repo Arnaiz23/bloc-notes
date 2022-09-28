@@ -1,25 +1,35 @@
 import React, {useEffect, useState} from "react";
+
 import NotesColumn from "../components/NotesColumn";
 import NotesPreview from "../components/NotesPreview";
+import {getAllNotes} from "../services/Notes";
 
-export default function AllNotesPage () {
+export default function AllNotesPage() {
   const [notes, setNotes] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:9000/api/v1/notes")
-      const json = await response.json()
+      const json = await getAllNotes()
       setNotes(json.data)
     }
     fetchData()
   }, [])
 
   return (
-    <NotesColumn>
-      <h2 className="w-full grid place-items-center p-5 text-xl font-bold h-[56px] sticky top-0 bg-orange-100 dark:bg-zinc-800 border-b border-white">All Notes</h2>
-      {notes.length > 0 && 
-          notes.map(note => <NotesPreview note={note} key={note._id} /> )
-      }
-    </NotesColumn>
+    <React.Fragment>
+      <NotesColumn title="All Notes">
+        {notes.length > 0 ?
+          (notes.map(note => <NotesPreview note={note} key={note._id} />))
+          : (
+            <div className="grid place-items-center h-[10%]">
+              <h3 className="opacity-[0.6]">Doesn&apos;t exists notes</h3>
+            </div>
+          )
+        }
+      </NotesColumn>
+      <div className="grid place-items-center w-full">
+        <h2 className="text-2xl text-zinc-400">Select one note</h2>
+      </div>
+    </React.Fragment>
   )
 }
