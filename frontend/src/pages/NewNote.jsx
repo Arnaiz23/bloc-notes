@@ -7,7 +7,6 @@ import {getAllNotes} from "../services/Notes";
 
 export default function NewNotePage() {
   const [notes, setNotes] = useState([])
-  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +14,7 @@ export default function NewNotePage() {
       setNotes(json.data)
     }
     fetchData()
-  }, [update])
+  }, [])
 
   return (
     <>
@@ -28,7 +27,7 @@ export default function NewNotePage() {
           </div>
         }
       </NotesColumn>
-      <FormNote update={update} setUpdate={setUpdate} />
+      <FormNote />
     </>
   )
 }
