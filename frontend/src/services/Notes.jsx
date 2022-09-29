@@ -25,3 +25,10 @@ export const updateOne = async (id, body) => {
   })
   return await response.json()
 }
+
+export const deleteNote = async (id) => {
+  const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}notes/${id}`, {
+    method: "DELETE",
+  })
+  return await response.json()
+}

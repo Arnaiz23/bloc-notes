@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 
 import FormNote from "../components/FormNote";
 import NotesColumn from "../components/NotesColumn";
-import {getAllNotes, getOneNote, updateOne} from "../services/Notes";
+import {deleteNote, getAllNotes, getOneNote, updateOne} from "../services/Notes";
 import NotesPreview from "../components/NotesPreview";
+import {useLocation} from "wouter";
 
 export default function OneNotePage({params}) {
   const [notes, setNotes] = useState([])
@@ -14,6 +15,7 @@ export default function OneNotePage({params}) {
 
   const [visible, setVisible] = useState(false)
   const [update, setUpdate] = useState(false)
+  const setLocation = useLocation()[1]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +50,22 @@ export default function OneNotePage({params}) {
     if (response.status === "OK") {
       setUpdate(true)
       alert("Updated note")
+    } else {
+      alert("Error in the update process. Retry later.")
+    }
+  }
+
+  const handleDelete = async () => {
+    if (confirm("Are you sure?")) {
+      const response = await deleteNote(params.id)
+      if (response.status === "OK") {
+        alert("Note deleted")
+        setLocation("/all")
+      } else {
+        alert("Error in the delete process. Retry later.")
+      }
+    } else {
+      alert("The note is safe")
     }
   }
 
@@ -63,6 +81,7 @@ export default function OneNotePage({params}) {
         }
       </NotesColumn>
       <FormNote handleSubmit={handleSubmit} setVisible={setVisible} visible={visible} title={oneNote.title} content={oneNote.content} id={params.id} setNote={setOneNote} note={oneNote} />
+      <button onClick={handleDelete} className="absolute grid place-items-center top-3 right-3 bg-red-600 p-2 rounded-md">Trash</button>
     </>
   )
 }
