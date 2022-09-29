@@ -7,6 +7,10 @@
 
 ## Backend
 
+### Errors WARNING!!!!!!!!!!
+
+- When you deleted all the notes, the backend has an error (NotesService::87:22 -> null Reading length)
+
 ### Routes
 
 - Folder
