@@ -29,7 +29,7 @@ export default function ListMenu({icon, title}) {
           <p className="opacity-70">0</p>
         }
       </div>
-      <ul className={`flex-col gap-2 p-1 ${show ? 'flex' : 'hidden'}`}>
+      <ul className={`flex-col gap-2 p-1 ${show ? 'flex' : 'hidden'} max-h-[500px] overflow-y-auto`}>
         {folders.length > 0 &&
           folders.map(folder =>
             <li key={folder._id} className="flex items-center justify-between">
