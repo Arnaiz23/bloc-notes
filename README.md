@@ -46,6 +46,4 @@
 
 ### Extra information
 
-- For add notes in a folder, I have 2 options:
-    1. In the name folder button, create a method that you can choose a new folder and the note is update automatically
-    2. When you select a folder, in the title of the second column create a button that when you click this you can choose the notes that you want to add
+- When you change the folder of a note, the count of the folder length in the header not change (Context or hook or both)
