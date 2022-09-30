@@ -27,30 +27,30 @@ function App() {
 }
 
 const DefaultPage = () => {
-  const {toggleMenu} = useShowMenu()
+  const {closeMenu} = useShowMenu()
 
   useEffect(() => {
-    toggleMenu()
+    closeMenu()
   }, [])
 
   return (
     <div className="w-full grid place-items-center">
-      <h1 className="text-5xl">Bloc Notes</h1>
+      <h1 className="text-5xl text-center">Bloc Notes</h1>
     </div>
 
   )
 }
 
 const Page404 = () => {
-  const {toggleMenu} = useShowMenu()
+  const {closeMenu} = useShowMenu()
 
   useEffect(() => {
-    toggleMenu()
+    closeMenu()
   }, [])
 
   return (
-    <div className="w-full grid place-items-center">
-      <h1 className="text-5xl">Ups... This page doesn&apos;t exists</h1>
+    <div className="w-[90%] mx-auto grid place-items-center">
+      <h1 className="text-4xl sm:text-5xl text-center">Ups... This page doesn&apos;t exists</h1>
     </div>
 
   )

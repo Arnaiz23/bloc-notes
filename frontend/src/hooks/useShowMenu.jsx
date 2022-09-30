@@ -8,5 +8,9 @@ export default function useShowMenu() {
     showMenu ? setShowMenu(false) : setShowMenu(true)
   }
 
-  return {showMenu, toggleMenu}
+  const closeMenu = () => {
+    showMenu && setShowMenu(false)
+  }
+
+  return {showMenu, toggleMenu, closeMenu}
 }
