@@ -19,10 +19,11 @@ const createNoteService = async (body) => {
 }
 
 const updateNoteService = async (id, body) => {
+  let noteExists
   try {
-    const exists = await Notes.findById(id)
+    noteExists = await Notes.findById(id)
 
-    if (!exists) {
+    if (!noteExists) {
       return { status: "This ID isn't correct" }
     }
   } catch (err) {
@@ -55,6 +56,17 @@ const updateNoteService = async (id, body) => {
     await Folder.findByIdAndUpdate(updateNote.folder_id, {
       length: folder.length + 1,
     })
+  }
+
+  if (noteExists.folder_id.length > 0 && updateNote.folder_id.length <= 0) {
+    try {
+      const actualFolder = await Folder.findById(noteExists.folder_id)
+      await Folder.findByIdAndUpdate(noteExists.folder_id, {
+        length: actualFolder.length - 1,
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return updateNote
