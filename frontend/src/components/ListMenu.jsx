@@ -1,20 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {FaFolder, FaMinusCircle, FaPlusCircle} from "react-icons/fa";
 
 import TextMenu from "./TextMenu";
-import {getFolders} from "../services/Folders";
+import useFolders from "../hooks/useFolders";
 
 export default function ListMenu({icon, title}) {
   const [show, setShow] = useState(false)
-  const [folders, setFolders] = useState([])
 
   const toggleList = () => {
     show ? setShow(false) : setShow(true)
   }
 
-  useEffect(() => {
-    getFolders().then(({data}) => setFolders(data))
-  }, [])
+  const {folders} = useFolders()
 
   return (
     <div className="flex align-center justify-start gap-4 p-2 cursor-pointer flex-col">

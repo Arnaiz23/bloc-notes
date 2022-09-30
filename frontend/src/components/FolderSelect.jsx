@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react"
-import { FaFolder, FaPencilAlt, FaCheck, FaArrowRight, FaTimes } from "react-icons/fa"
+import React, {useEffect, useState} from "react"
+import {FaFolder, FaPencilAlt, FaCheck, FaArrowRight, FaTimes} from "react-icons/fa"
 
-import { getFolder, getFolders } from "../services/Folders"
-import { updateOne } from "../services/Notes"
+import {getFolder, getFolders} from "../services/Folders"
+import {updateOne} from "../services/Notes"
+
+import useFolders from "../hooks/useFolders"
 
 const FOLDER_COLOR_DEFAULT =
 {
@@ -33,12 +35,13 @@ const FOLDERS_COLORS = [
     }
 ]
 
-export default function FolderSelect({ note, setNote }) {
+export default function FolderSelect({note, setNote}) {
     const [folderName, setFolderName] = useState(null)
     const [folderColor, setFolderColor] = useState(FOLDER_COLOR_DEFAULT)
     const [optionsChange, setOptionsChange] = useState(false)
     const [folders, setFolders] = useState([])
     const [newFolder, setNewFolder] = useState("")
+    const {toggleUpdate} = useFolders()
 
     const [isMounted, setIsMounted] = useState(null)
 
@@ -82,6 +85,7 @@ export default function FolderSelect({ note, setNote }) {
         if (response.status === "OK") {
             setOptionsChange(false)
             setNote(response.data)
+            toggleUpdate(true)
         } else {
             alert("Error in the process of change the folder")
         }
