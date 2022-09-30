@@ -47,3 +47,5 @@
 ### Extra information
 
 - When you change the folder of a note, the count of the folder length in the header not change (Context or hook or both)
+- If you create a lot of folders, collapse the design (put a scroll)
+- If you updated the note, the folder length increase 1 although the folder doesn't changed
