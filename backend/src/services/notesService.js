@@ -81,13 +81,15 @@ const deleteNoteService = async (id) => {
     response = { status: "Error" }
   }
 
-  try {
-    const folder = await Folder.findById(response.folder_id)
-    await Folder.findByIdAndUpdate(response.folder_id, {
-      length: folder.length - 1,
-    })
-  } catch (err) {
-    console.log(err)
+  if (response.folder_id) {
+    try {
+      const folder = await Folder.findById(response.folder_id)
+      await Folder.findByIdAndUpdate(response.folder_id, {
+        length: folder.length - 1,
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return response
