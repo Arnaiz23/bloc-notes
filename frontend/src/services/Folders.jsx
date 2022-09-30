@@ -1,5 +1,5 @@
 export async function getFolders() {
-  const response = await fetch("http://localhost:9000/api/v1/folders")
+  const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}folders`)
   return response.json()
 }
 
