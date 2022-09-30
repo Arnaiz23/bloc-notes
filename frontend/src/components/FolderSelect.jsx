@@ -33,12 +33,12 @@ const FOLDERS_COLORS = [
     }
 ]
 
-export default function FolderSelect({ note }) {
+export default function FolderSelect({ note, setNote }) {
     const [folderName, setFolderName] = useState(null)
     const [folderColor, setFolderColor] = useState(FOLDER_COLOR_DEFAULT)
     const [optionsChange, setOptionsChange] = useState(false)
     const [folders, setFolders] = useState([])
-    const [newFolder, setNewFolder] = useState(null)
+    const [newFolder, setNewFolder] = useState("")
 
     const [isMounted, setIsMounted] = useState(null)
 
@@ -75,12 +75,16 @@ export default function FolderSelect({ note }) {
     }
 
     const handleClickChange = async () => {
-        console.log(note.folder_id)
-        console.log(newFolder)
-        if (newFolder === null) return
-        note.folder_id = newFolder
-        // const response = await updateOne(note._id, note)
-        // console.log(response)
+        if (newFolder === note.folder_id) return
+        const updateNote = structuredClone(note)
+        updateNote.folder_id = newFolder
+        const response = await updateOne(note._id, updateNote)
+        if (response.status === "OK") {
+            setOptionsChange(false)
+            setNote(response.data)
+        } else {
+            alert("Error in the process of change the folder")
+        }
     }
 
     return isMounted ? (
@@ -91,7 +95,7 @@ export default function FolderSelect({ note }) {
             <div className={`${optionsChange ? 'flex' : 'hidden'} justify-evenly items-center`}>
                 <span className='flex justify-evenly items-center gap-2 rounded-md bg-gray-500 py-1 px-2 mx-5'><i><FaFolder /></i>
                     <select className="bg-transparent flex items-center" onChange={handleChange}>
-                        <option value="0">No Folder</option>
+                        <option value="">No Folder</option>
                         {folders.length > 0 &&
                             folders.map(folder => <option key={folder._id} value={folder._id}>{folder.name}</option>)
                         }
