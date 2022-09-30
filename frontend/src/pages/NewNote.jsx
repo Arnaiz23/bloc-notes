@@ -12,7 +12,8 @@ export default function NewNotePage() {
   const [visible, setVisible] = useState(false)
   const [note, setNote] = useState({
     "title": "",
-    "content": ""
+    "content": "",
+    "folder_id": ""
   })
   const setLocation = useLocation()[1]
 
