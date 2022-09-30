@@ -1,17 +1,14 @@
-import React, {useState} from "react"
+import React from "react"
 import {FaBook, FaFolderPlus, FaFile, FaFileAlt, FaTrash, FaBars, FaTimes} from "react-icons/fa"
 
 import ToggleTheme from "./ToggleTheme"
 import TextMenu from "./TextMenu"
 import ListMenu from "./ListMenu"
+import useShowMenu from "../hooks/useShowMenu"
 
 export default function Header() {
 
-  const [showMenu, setShowMenu] = useState(false)
-
-  const toggleMenu = () => {
-    showMenu ? setShowMenu(false) : setShowMenu(true)
-  }
+  const {showMenu, toggleMenu} = useShowMenu()
 
   return (
     <div>

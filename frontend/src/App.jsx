@@ -5,6 +5,8 @@ import AllNotesPage from "./pages/AllNotes.jsx"
 import NewNotePage from "./pages/NewNote.jsx"
 import OneNotePage from "./pages/OneNote.jsx"
 import ContextProvider from "./context/Context.jsx"
+import useShowMenu from "./hooks/useShowMenu.jsx"
+import {useEffect} from "react"
 
 function App() {
 
@@ -25,6 +27,12 @@ function App() {
 }
 
 const DefaultPage = () => {
+  const {toggleMenu} = useShowMenu()
+
+  useEffect(() => {
+    toggleMenu()
+  }, [])
+
   return (
     <div className="w-full grid place-items-center">
       <h1 className="text-5xl">Bloc Notes</h1>
@@ -34,6 +42,12 @@ const DefaultPage = () => {
 }
 
 const Page404 = () => {
+  const {toggleMenu} = useShowMenu()
+
+  useEffect(() => {
+    toggleMenu()
+  }, [])
+
   return (
     <div className="w-full grid place-items-center">
       <h1 className="text-5xl">Ups... This page doesn&apos;t exists</h1>

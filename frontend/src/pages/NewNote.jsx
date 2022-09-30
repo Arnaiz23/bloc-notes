@@ -4,6 +4,7 @@ import FormNote from "../components/FormNote";
 
 import NotesColumn from "../components/NotesColumn";
 import NotesPreview from "../components/NotesPreview";
+import useShowMenu from "../hooks/useShowMenu";
 import {getAllNotes, createNote} from "../services/Notes";
 
 export default function NewNotePage() {
@@ -16,8 +17,10 @@ export default function NewNotePage() {
     "folder_id": ""
   })
   const setLocation = useLocation()[1]
+  const {toggleMenu} = useShowMenu()
 
   useEffect(() => {
+    toggleMenu()
     const fetchData = async () => {
       const json = await getAllNotes()
       setNotes(json.data)

@@ -3,13 +3,16 @@ import React, {useEffect, useState} from "react";
 import NotesColumn from "../components/NotesColumn";
 import NotesPreview from "../components/NotesPreview";
 import useFolders from "../hooks/useFolders";
+import useShowMenu from "../hooks/useShowMenu";
 import {getAllNotes} from "../services/Notes";
 
 export default function AllNotesPage() {
   const [notes, setNotes] = useState([])
   const {toggleUpdate} = useFolders()
+  const {toggleMenu} = useShowMenu()
 
   useEffect(() => {
+    toggleMenu()
     toggleUpdate()
     const fetchData = async () => {
       const json = await getAllNotes()
