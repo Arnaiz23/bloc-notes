@@ -52,7 +52,10 @@ const updateNoteService = async (id, body) => {
     return { status: "Error in the update proccess" }
   }
 
-  if (updateNote.folder_id) {
+  if (
+    noteExists.folder_id !== updateNote.folder_id &&
+    updateNote.folder_id.length > 0
+  ) {
     await Folder.findByIdAndUpdate(updateNote.folder_id, {
       length: folder.length + 1,
     })
