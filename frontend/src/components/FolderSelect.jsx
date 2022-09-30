@@ -85,7 +85,7 @@ export default function FolderSelect({note, setNote}) {
         if (response.status === "OK") {
             setOptionsChange(false)
             setNote(response.data)
-            toggleUpdate(true)
+            toggleUpdate()
         } else {
             alert("Error in the process of change the folder")
         }
