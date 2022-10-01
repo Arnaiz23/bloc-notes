@@ -25,7 +25,7 @@ export default function AllNotesPage() {
     <React.Fragment>
       <NotesColumn title="All Notes">
         {notes.length > 0 ?
-          (notes.map(note => <NotesPreview note={note} key={note._id} />))
+          (notes.map(note => <NotesPreview note={note} key={note._id} url="all" />))
           : (
             <div className="grid place-items-center h-[10%]">
               <h3 className="opacity-[0.6]">Doesn&apos;t exists notes</h3>

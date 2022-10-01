@@ -7,6 +7,7 @@ import OneNotePage from "./pages/OneNote.jsx"
 import ContextProvider from "./context/Context.jsx"
 import useShowMenu from "./hooks/useShowMenu.jsx"
 import {useEffect} from "react"
+import OneFolder from "./pages/OneFolder.jsx"
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
           <Route path="/all" component={AllNotesPage} />
           <Route path="/all/new" component={NewNotePage} />
           <Route path="/all/:id" component={OneNotePage} />
+          <Route path="/:folderId" component={OneFolder} />
+          <Route path="/:folderId/:id" component={OneNotePage} />
           <Route component={Page404} />
         </Switch>
       </div>
