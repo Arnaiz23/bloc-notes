@@ -95,6 +95,7 @@ const getFolderService = async (id) => {
     const notes = await Notes.find({ folder_id: folder._id })
 
     const data = {
+      _id: folder._id,
       name: folder.name,
       notes,
     }
