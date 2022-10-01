@@ -9,10 +9,10 @@ import {getAllNotes} from "../services/Notes";
 export default function AllNotesPage() {
   const [notes, setNotes] = useState([])
   const {toggleUpdate} = useFolders()
-  const {toggleMenu} = useShowMenu()
+  const {closeMenu} = useShowMenu()
 
   useEffect(() => {
-    toggleMenu()
+    closeMenu()
     toggleUpdate()
     const fetchData = async () => {
       const json = await getAllNotes()

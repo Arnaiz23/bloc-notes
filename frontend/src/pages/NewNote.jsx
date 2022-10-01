@@ -17,10 +17,10 @@ export default function NewNotePage() {
     "folder_id": ""
   })
   const setLocation = useLocation()[1]
-  const {toggleMenu} = useShowMenu()
+  const {closeMenu} = useShowMenu()
 
   useEffect(() => {
-    toggleMenu()
+    closeMenu()
     const fetchData = async () => {
       const json = await getAllNotes()
       setNotes(json.data)

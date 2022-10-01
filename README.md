@@ -46,5 +46,7 @@
 
 ### Extra information
 
-- All Notes but only in a folder
-- Create folder
+- In /folderId/id -> when you change the note folder, the notes not change
+- Folder change style
+- Delete folder
+- Change the /folderId for /folder/:folderId/ because if not change the 404 page never show

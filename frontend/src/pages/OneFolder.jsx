@@ -2,11 +2,15 @@ import React, {useEffect, useState} from "react";
 
 import NotesColumn from "../components/NotesColumn";
 import NotesPreview from "../components/NotesPreview";
+import useFolders from "../hooks/useFolders";
+import useShowMenu from "../hooks/useShowMenu";
 import {getFolder} from "../services/Folders";
 
 const OneFolder = ({params}) => {
   const [folder, setFolder] = useState({})
   const [notes, setNotes] = useState([])
+  const {toggleUpdate} = useFolders()
+  const {closeMenu} = useShowMenu()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +19,8 @@ const OneFolder = ({params}) => {
       setNotes(response.data.notes)
     }
     fetchData()
+    toggleUpdate()
+    closeMenu()
   }, [params.id])
 
   return (

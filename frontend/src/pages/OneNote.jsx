@@ -5,9 +5,11 @@ import NotesColumn from "../components/NotesColumn";
 import {deleteNote, getAllNotes, getOneNote, updateOne} from "../services/Notes";
 import NotesPreview from "../components/NotesPreview";
 import {useLocation} from "wouter";
+import {getFolder} from "../services/Folders";
 
 export default function OneNotePage({params}) {
   const [notes, setNotes] = useState([])
+  const [folder, setFolder] = useState({})
   const [oneNote, setOneNote] = useState({
     "title": "",
     "content": ""
@@ -17,13 +19,24 @@ export default function OneNotePage({params}) {
   const [update, setUpdate] = useState(false)
   const setLocation = useLocation()[1]
 
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getAllNotes()
-      setNotes(response.data)
-      setUpdate(false)
+    if (!params.folderId) {
+      const fetchData = async () => {
+        const response = await getAllNotes()
+        setNotes(response.data)
+        setUpdate(false)
+      }
+      fetchData()
+    } else {
+      const fetchData = async () => {
+        const response = await getFolder(params.folderId)
+        setNotes(response.data.notes)
+        setFolder(response.data)
+        setUpdate(false)
+      }
+      fetchData()
     }
-    fetchData()
   }, [update])
 
   useEffect(() => {
@@ -60,7 +73,7 @@ export default function OneNotePage({params}) {
       const response = await deleteNote(params.id)
       if (response.status === "OK") {
         alert("Note deleted")
-        setLocation("/all")
+        setLocation(params.folderId ? `/${params.folderId}` : "/all")
       } else {
         alert("Error in the delete process. Retry later.")
       }
@@ -71,7 +84,7 @@ export default function OneNotePage({params}) {
 
   return (
     <>
-      <NotesColumn title="All Notes">
+      <NotesColumn title={params.folderId ? folder.name : "All Notes"}>
         {notes.length > 0 ?
           notes.map(note => <NotesPreview note={note} key={note._id} active={note._id === params.id && "active"} />)
           :

@@ -8,6 +8,8 @@ import ContextProvider from "./context/Context.jsx"
 import useShowMenu from "./hooks/useShowMenu.jsx"
 import {useEffect} from "react"
 import OneFolder from "./pages/OneFolder.jsx"
+import CreateFolder from "./pages/CreateFolder.jsx"
+import useFolders from "./hooks/useFolders.jsx"
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
           <Route path="/all" component={AllNotesPage} />
           <Route path="/all/new" component={NewNotePage} />
           <Route path="/all/:id" component={OneNotePage} />
+          <Route path="/newFolder" component={CreateFolder} />
           <Route path="/:folderId" component={OneFolder} />
           <Route path="/:folderId/:id" component={OneNotePage} />
           <Route component={Page404} />
@@ -31,9 +34,11 @@ function App() {
 
 const DefaultPage = () => {
   const {closeMenu} = useShowMenu()
+  const {toggleUpdate} = useFolders()
 
   useEffect(() => {
     closeMenu()
+    toggleUpdate()
   }, [])
 
   return (
