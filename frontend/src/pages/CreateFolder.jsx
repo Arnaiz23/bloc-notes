@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {createFolder} from "../services/Folders";
 import {useLocation} from "wouter";
+import useShowMenu from "../hooks/useShowMenu";
 
 const CreateFolder = () => {
   const [newFolder, setNewFolder] = useState({
@@ -9,6 +10,9 @@ const CreateFolder = () => {
     "length": 0
   })
   const setLocation = useLocation()[1]
+  const {toggleMenu} = useShowMenu()
+
+  useEffect(() => toggleMenu(), [])
 
   const handleChange = e => {
     setNewFolder({

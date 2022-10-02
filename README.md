@@ -46,4 +46,4 @@
 
 ### Extra information
 
-- Folder change style when you change the folder in a note
+- Create a note, select folder
