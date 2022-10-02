@@ -6,6 +6,7 @@ import {deleteNote, getAllNotes, getOneNote, updateOne} from "../services/Notes"
 import NotesPreview from "../components/NotesPreview";
 import {useLocation} from "wouter";
 import {getFolder} from "../services/Folders";
+import {FaTrash} from "react-icons/fa";
 
 export default function OneNotePage({params}) {
   const [notes, setNotes] = useState([])
@@ -94,7 +95,7 @@ export default function OneNotePage({params}) {
         }
       </NotesColumn>
       <FormNote handleSubmit={handleSubmit} setVisible={setVisible} visible={visible} title={oneNote.title} content={oneNote.content} id={params.id} setNote={setOneNote} note={oneNote} />
-      <button onClick={handleDelete} className="absolute grid place-items-center top-3 right-3 bg-red-600 p-2 rounded-md">Trash</button>
+      <button onClick={handleDelete} className="absolute grid place-items-center top-3 right-3 bg-red-600 p-2 rounded-md"><FaTrash /></button>
     </>
   )
 }

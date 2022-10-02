@@ -21,14 +21,14 @@ const OneFolder = ({params}) => {
     fetchData()
     toggleUpdate()
     closeMenu()
-  }, [params.id])
+  }, [params.folderId])
 
   return (
     <>
-      <NotesColumn title={folder.name}>
+      <NotesColumn title={folder.name} buttonDelete={true} folderId={params.folderId}>
         {
           notes.length > 0 ?
-            notes.map(note => <NotesPreview key={note._id} note={note} url={folder._id} />)
+            notes.map(note => <NotesPreview key={note._id} note={note} url={`folder/${folder._id}`} />)
             :
             <h3 className="p-4 text-center text-zinc-400">This folder doesn&apos;t has notes</h3>
         }

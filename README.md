@@ -46,7 +46,5 @@
 
 ### Extra information
 
-- In /folderId/id -> when you change the note folder, the notes not change
-- Folder change style
-- Delete folder
-- Change the /folderId for /folder/:folderId/ because if not change the 404 page never show
+- In /folder/folderId/id -> when you change the note folder, the notes not change
+- Folder change style when you change the folder in a note

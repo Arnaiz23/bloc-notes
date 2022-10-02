@@ -18,3 +18,10 @@ export const createFolder = async (body) => {
   })
   return response.json()
 }
+
+export const deleteFolder = async (id) => {
+  const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}folders/${id}`, {
+    method: "DELETE"
+  })
+  return response.json()
+}

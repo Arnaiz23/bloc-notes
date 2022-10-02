@@ -23,8 +23,8 @@ function App() {
           <Route path="/all/new" component={NewNotePage} />
           <Route path="/all/:id" component={OneNotePage} />
           <Route path="/newFolder" component={CreateFolder} />
-          <Route path="/:folderId" component={OneFolder} />
-          <Route path="/:folderId/:id" component={OneNotePage} />
+          <Route path="/folder/:folderId" component={OneFolder} />
+          <Route path="/folder/:folderId/:id" component={OneNotePage} />
           <Route component={Page404} />
         </Switch>
       </div>

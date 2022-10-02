@@ -21,7 +21,6 @@ const CreateFolder = () => {
     e.preventDefault()
     const response = await createFolder(newFolder)
     if (response.status === "OK") {
-      alert("Folder created successfully!!")
       setLocation("/")
     } else {
       alert("Error in the create folder process")
