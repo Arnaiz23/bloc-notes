@@ -23,7 +23,7 @@ export default function AllNotesPage() {
 
   return (
     <React.Fragment>
-      <NotesColumn title="All Notes">
+      <NotesColumn title="All Notes" noNote={true}>
         {notes.length > 0 ?
           (notes.map(note => <NotesPreview note={note} key={note._id} url="all" />))
           : (
@@ -33,9 +33,6 @@ export default function AllNotesPage() {
           )
         }
       </NotesColumn>
-      <div className="grid place-items-center w-full">
-        <h2 className="text-2xl text-zinc-400">Select one note</h2>
-      </div>
     </React.Fragment>
   )
 }

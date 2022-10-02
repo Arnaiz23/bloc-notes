@@ -25,7 +25,7 @@ const OneFolder = ({params}) => {
 
   return (
     <>
-      <NotesColumn title={folder.name} buttonDelete={true} folderId={params.folderId}>
+      <NotesColumn title={folder.name} buttonDelete={true} folderId={params.folderId} noNote={true}>
         {
           notes.length > 0 ?
             notes.map(note => <NotesPreview key={note._id} note={note} url={`folder/${folder._id}`} />)
