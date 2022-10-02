@@ -5,6 +5,7 @@ import {getFolder, getFolders} from "../services/Folders"
 import {updateOne} from "../services/Notes"
 
 import useFolders from "../hooks/useFolders"
+import {useLocation} from "wouter"
 
 const FOLDER_COLOR_DEFAULT =
 {
@@ -44,6 +45,8 @@ export default function FolderSelect({note, setNote}) {
     const {toggleUpdate} = useFolders()
 
     const [isMounted, setIsMounted] = useState(null)
+
+    const [location, setLocation] = useLocation()
 
     useEffect(() => {
         if (note.folder_id) {
@@ -86,6 +89,11 @@ export default function FolderSelect({note, setNote}) {
             setOptionsChange(false)
             setNote(response.data)
             toggleUpdate()
+            if (location.includes("/folder")) {
+                const url = location.split("/")
+                const newUrl = `/folder/${url[2]}`
+                setLocation(newUrl)
+            }
         } else {
             alert("Error in the process of change the folder")
         }

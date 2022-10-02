@@ -46,5 +46,4 @@
 
 ### Extra information
 
-- In /folder/folderId/id -> when you change the note folder, the notes not change
 - Folder change style when you change the folder in a note
