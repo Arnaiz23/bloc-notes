@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <div>
       <button onClick={toggleMenu} className="absolute top-5 left-5 text-xl xl:hidden z-30">{showMenu ? <FaTimes /> : <FaBars />}</button>
-      <header className={`h-screen bg-zinc-900 xl:flex flex-col min-w-[255px] p-5 z-20 transition-all duration-300  ${showMenu ? 'translate-x-0 opacity-100 fixed' : 'opacity-0 -translate-x-full fixed'} xl:relative xl:translate-x-0 xl:opacity-100`}>
+      <header className={`h-screen bg-orange-50 dark:bg-zinc-900 xl:flex flex-col min-w-[255px] p-5 z-20 transition-all duration-300  ${showMenu ? 'translate-x-0 opacity-100 fixed' : 'opacity-0 -translate-x-full fixed'} xl:relative xl:translate-x-0 xl:opacity-100`}>
         <div className="w-full flex justify-end items-center px-6">
           <ToggleTheme />
         </div>

@@ -85,7 +85,7 @@ export default function OneNotePage({params}) {
 
   return (
     <>
-      <NotesColumn title={params.folderId ? folder.name : "All Notes"} noNote={false}>
+      <NotesColumn title={params.folderId ? folder.name : "All Notes"} noNote={false} buttonDelete={params.folderId && true}>
         {notes.length > 0 ?
           notes.map(note => <NotesPreview note={note} key={note._id} active={note._id === params.id && "active"} url={location.split("/")[1] === "all" ? "all" : `folder/${params.folderId}` } />)
           :
@@ -95,7 +95,7 @@ export default function OneNotePage({params}) {
         }
       </NotesColumn>
       <FormNote handleSubmit={handleSubmit} setVisible={setVisible} visible={visible} title={oneNote.title} content={oneNote.content} id={params.id} setNote={setOneNote} note={oneNote} />
-      <button onClick={handleDelete} className="absolute grid place-items-center top-3 right-3 bg-red-600 p-2 rounded-md"><FaTrash /></button>
+      <button onClick={handleDelete} className="absolute grid place-items-center top-3 right-3 bg-red-500 dark:bg-red-600 p-2 rounded-md"><FaTrash /></button>
     </>
   )
 }

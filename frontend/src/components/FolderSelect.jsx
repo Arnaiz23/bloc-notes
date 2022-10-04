@@ -8,10 +8,10 @@ import useFolders from "../hooks/useFolders"
 import {useLocation} from "wouter"
 
 const FOLDER_COLOR_DEFAULT =
-{
-    "bg": "bg-gray-500",
-    "c": "text-white"
-}
+    {
+        "bg": "bg-cyan-500 dark:bg-gray-500",
+        "c": "text-white"
+    }
 
 const FOLDERS_COLORS = [
     {
@@ -101,23 +101,23 @@ export default function FolderSelect({note, setNote, folderHidden}) {
 
     return isMounted ? (
         <div className="flex justify-start md:justify-evenly items-center flex-wrap gap-3 md:gap-0">
-            <span className={`flex justify-evenly items-center gap-2 rounded-md ${!note.folder_id ? 'bg-gray-500' : `${folderColor.bg} ${folderColor.c}`} py-1 px-2 mx-5`}><i><FaFolder /></i> {note.folder_id ? `${folderName}` : 'No Folder'}</span>
-            <i className={`${optionsChange ? 'hidden' : 'block'} ${folderHidden && 'hidden'} cursor-pointer text-orange-500`} onClick={handleShowOptions}><FaPencilAlt /></i>
+            <span className={`flex justify-evenly items-center gap-2 rounded-md ${!note.folder_id ? FOLDER_COLOR_DEFAULT.bg : `${folderColor.bg} ${folderColor.c}`} py-1 px-2 mx-5`}><i><FaFolder /></i> {note.folder_id ? `${folderName}` : 'No Folder'}</span>
+            <i className={`${optionsChange ? 'hidden' : 'block'} ${folderHidden && 'hidden'} cursor-pointer dark:text-orange-500`} onClick={handleShowOptions}><FaPencilAlt /></i>
             <i className={optionsChange ? 'block' : 'hidden'}><FaArrowRight /></i>
             <div className={`${optionsChange ? 'flex' : 'hidden'} justify-evenly items-center`}>
-                <span className='flex justify-evenly items-center gap-2 rounded-md bg-gray-500 py-1 px-2 mx-5'><i><FaFolder /></i>
+                <span className='flex justify-evenly items-center gap-2 rounded-md bg-gray-500 py-1 px-2 mx-5 text-white'><i><FaFolder /></i>
                     <select className="bg-transparent flex items-center" onChange={handleChange}>
                         <option value="">No Folder</option>
                         {folders.length > 0 &&
                             folders.map(folder => <option key={folder._id} value={folder._id}>{folder.name}</option>)
-                        }
+                    }
                     </select>
                 </span>
-                <i className="text-green-500 cursor-pointer" onClick={handleClickChange}><FaCheck /></i>
-                <i className="text-red-500 cursor-pointer ml-5" onClick={handleShowOptions}><FaTimes /></i>
+                <i className="text-green-700 dark:text-green-500 cursor-pointer" onClick={handleClickChange}><FaCheck /></i>
+                <i className="text-red-700 cursor-pointer ml-5" onClick={handleShowOptions}><FaTimes /></i>
             </div>
         </div>
     ) : (
-        <div></div>
-    )
+            <div></div>
+        )
 }

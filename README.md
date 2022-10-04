@@ -43,7 +43,3 @@
 
 
 ## Frontend
-
-### Extra information
-
-- Create a note, select folder
