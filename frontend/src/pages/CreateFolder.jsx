@@ -34,7 +34,7 @@ const CreateFolder = () => {
   return (
     <form onSubmit={handleSubmit} className="w-full flex justify-center items-center gap-16 flex-col">
       <h2 className="text-3xl">Create folder</h2>
-      <input type="text" name="name" onChange={handleChange} placeholder="Folder Name" className="p-2 w-52 focus:outline-none" />
+      <input type="text" name="name" autoFocus onChange={handleChange} placeholder="Folder Name" className="p-2 w-52 focus:outline-none" />
       <button className="bg-green-600 p-2 rounded-lg w-48">Create</button>
     </form>
   )

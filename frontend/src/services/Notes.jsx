@@ -1,5 +1,5 @@
 export const getAllNotes = async () => {
-  const response = await fetch("http://localhost:9000/api/v1/notes")
+  const response = await fetch(`${import.meta.env.VITE_URL_BACKEND}notes`)
   return await response.json()
 }
 
