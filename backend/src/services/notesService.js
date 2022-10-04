@@ -61,7 +61,10 @@ const updateNoteService = async (id, body) => {
     })
   }
 
-  if (noteExists.folder_id.length > 0) {
+  if (
+    noteExists.folder_id !== updateNote.folder_id &&
+    noteExists.folder_id.length > 0
+  ) {
     try {
       const actualFolder = await Folder.findById(noteExists.folder_id)
       await Folder.findByIdAndUpdate(noteExists.folder_id, {
