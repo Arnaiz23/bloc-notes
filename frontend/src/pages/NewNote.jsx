@@ -48,14 +48,14 @@ export default function NewNotePage() {
     <>
       <NotesColumn title="All Notes">
         {notes.length > 0 ?
-          notes.map(note => <NotesPreview key={note._id} note={note} />)
+          notes.map(note => <NotesPreview key={note._id} note={note} url="all" />)
           :
           <div className="grid place-items-center h-[10%]">
             <h3 className="opacity-[0.6]">Doesn&apos;t exists notes</h3>
           </div>
         }
       </NotesColumn>
-      <FormNote handleSubmit={handleSubmit} visible={visible} setVisible={setVisible} setNote={setNote} note={note} />
+      <FormNote handleSubmit={handleSubmit} visible={visible} setVisible={setVisible} setNote={setNote} note={note} folderHidden={true} />
     </>
   )
 }

@@ -47,4 +47,3 @@
 ### Extra information
 
 - Create a note, select folder
-- When you update a note, the folder length change

@@ -18,7 +18,7 @@ export default function OneNotePage({params}) {
 
   const [visible, setVisible] = useState(false)
   const [update, setUpdate] = useState(false)
-  const setLocation = useLocation()[1]
+  const [location, setLocation] = useLocation()
 
 
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function OneNotePage({params}) {
     <>
       <NotesColumn title={params.folderId ? folder.name : "All Notes"} noNote={false}>
         {notes.length > 0 ?
-          notes.map(note => <NotesPreview note={note} key={note._id} active={note._id === params.id && "active"} />)
+          notes.map(note => <NotesPreview note={note} key={note._id} active={note._id === params.id && "active"} url={location.split("/")[1] === "all" ? "all" : `folder/${params.folderId}` } />)
           :
           <div className="grid place-items-center h-[10%]">
             <h3 className="opacity-[0.6]">Doesn&apos;t exists notes</h3>
