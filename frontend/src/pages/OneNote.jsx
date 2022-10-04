@@ -85,7 +85,7 @@ export default function OneNotePage({params}) {
 
   return (
     <>
-      <NotesColumn title={params.folderId ? folder.name : "All Notes"} noNote={false} buttonDelete={params.folderId && true}>
+      <NotesColumn title={params.folderId ? folder.name : "All Notes"} noNote={false} buttonDelete={params.folderId && true} folderId={params.folderId}>
         {notes.length > 0 ?
           notes.map(note => <NotesPreview note={note} key={note._id} active={note._id === params.id && "active"} url={location.split("/")[1] === "all" ? "all" : `folder/${params.folderId}` } />)
           :
