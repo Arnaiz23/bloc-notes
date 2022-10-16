@@ -16,7 +16,7 @@ export default function NotesColumn({ children, title, buttonDelete, folderId, n
   }
 
   return (
-    <div className={`md:block max-w-[350px] min-w-[300px] bg-orange-100 dark:bg-zinc-800 overflow-y-auto h-screen relative ${noNote ? 'block' : 'hidden'}`}>
+    <div className={`md:block md:max-w-[350px] min-w-[300px] bg-orange-100 dark:bg-zinc-800 overflow-y-auto h-screen relative ${noNote ? 'block' : 'hidden'}`}>
       <div>
         {buttonDelete && <button className="absolute bg-red-500 dark:bg-red-800 top-2 right-2 z-10 p-2 rounded-md" onClick={handleDeleteFolder}><FaTrash /></button>}
         <h2 className="w-full grid place-items-center p-5 text-xl font-bold h-[56px] sticky top-0 bg-orange-100 dark:bg-zinc-800 border-b border-white">{title}</h2>
