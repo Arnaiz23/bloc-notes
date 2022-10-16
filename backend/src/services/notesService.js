@@ -3,7 +3,7 @@ const Notes = require("../database/schemas/Notes")
 const Folder = require("../database/schemas/Folder")
 
 const getNotesService = async () => {
-  const notes = await Notes.find()
+  const notes = await Notes.find().sort({ updatedAt: "desc" })
   return notes
 }
 

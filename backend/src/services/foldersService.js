@@ -92,7 +92,9 @@ const getFolderService = async (id) => {
   try {
     const folder = await Folder.findById(id)
 
-    const notes = await Notes.find({ folder_id: folder._id })
+    const notes = await Notes.find({ folder_id: folder._id }).sort({
+      updatedAt: "desc",
+    })
 
     const data = {
       _id: folder._id,
