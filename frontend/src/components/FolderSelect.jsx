@@ -77,7 +77,7 @@ export default function FolderSelect({note, setNote, folderHidden}) {
     }
 
     return isMounted ? (
-        <div className="flex justify-start md:justify-evenly items-center flex-wrap gap-3 md:gap-0">
+        <div className="flex justify-start md:justify-evenly items-center flex-wrap gap-3 md:gap-0 mb-2">
             <span className={`flex justify-evenly items-center gap-2 rounded-md ${!note.folder_id ? FOLDER_COLOR_DEFAULT.bg : `${folderColor.bg} ${folderColor.c}`} py-1 px-2 mx-5`}><i><FaFolder /></i> {note.folder_id ? `${folderName}` : 'No Folder'}</span>
             <i className={`${optionsChange ? 'hidden' : 'block'} ${folderHidden && 'hidden'} cursor-pointer dark:text-orange-500`} onClick={handleShowOptions}><FaPencilAlt /></i>
             <i className={optionsChange ? 'block' : 'hidden'}><FaArrowRight /></i>
