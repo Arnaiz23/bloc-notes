@@ -1,6 +1,29 @@
 const Folder = require("../database/schemas/Folder")
 const Notes = require("../database/schemas/Notes")
 
+const FOLDER_COLORS = [
+  {
+    bg: "bg-red-700",
+    c: "text-white",
+  },
+  {
+    bg: "bg-orange-600",
+    c: "text-white",
+  },
+  {
+    bg: "bg-amber-400",
+    c: "text-black",
+  },
+  {
+    bg: "bg-lime-500",
+    c: "text-black",
+  },
+  {
+    bg: "bg-cyan-500",
+    c: "text-black",
+  },
+]
+
 const getFoldersService = async () => {
   let getFolders
 
@@ -22,8 +45,11 @@ const createFolderService = async (body) => {
 
   const date = new Date()
 
+  const randomNumber = Math.round(Math.random(0, FOLDER_COLORS.length + 1))
+
   body.createdAt = date
   body.updateAt = date
+  body.color = FOLDER_COLORS[randomNumber]
 
   try {
     createFolder = await Folder.create(body)
@@ -99,6 +125,7 @@ const getFolderService = async (id) => {
     const data = {
       _id: folder._id,
       name: folder.name,
+      color: folder.color,
       notes,
     }
 

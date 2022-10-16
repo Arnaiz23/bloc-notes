@@ -23,6 +23,11 @@ const FolderSchema = new Schema({
     required: true,
     unique: false,
   },
+  color: {
+    type: Object,
+    required: true,
+    unique: false,
+  },
 })
 
 module.exports = mongoose.model("Folder", FolderSchema)

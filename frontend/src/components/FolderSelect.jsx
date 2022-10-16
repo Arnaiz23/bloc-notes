@@ -13,29 +13,6 @@ const FOLDER_COLOR_DEFAULT =
         "c": "text-white"
     }
 
-const FOLDERS_COLORS = [
-    {
-        "bg": "bg-red-700",
-        "c": "text-white"
-    },
-    {
-        "bg": "bg-orange-600",
-        "c": "text-white"
-    },
-    {
-        "bg": "bg-amber-400",
-        "c": "text-black"
-    },
-    {
-        "bg": "bg-lime-500",
-        "c": "text-black"
-    },
-    {
-        "bg": "bg-cyan-500",
-        "c": "text-black"
-    }
-]
-
 export default function FolderSelect({note, setNote, folderHidden}) {
     const [folderName, setFolderName] = useState(null)
     const [folderColor, setFolderColor] = useState(FOLDER_COLOR_DEFAULT)
@@ -53,7 +30,7 @@ export default function FolderSelect({note, setNote, folderHidden}) {
             const fetchData = async () => {
                 const response = await getFolder(note.folder_id)
                 setFolderName(response.data.name)
-                setFolderColor(FOLDERS_COLORS[Math.round(Math.random(0, FOLDERS_COLORS.length + 1))])
+                setFolderColor(response.data.color)
                 setIsMounted(true)
             }
             fetchData()
