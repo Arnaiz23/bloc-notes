@@ -64,6 +64,7 @@ export default function OneNotePage({params}) {
     if (response.status === "OK") {
       setUpdate(true)
       alert("Updated note")
+      setVisible(false)
     } else {
       alert("Error in the update process. Retry later.")
     }
